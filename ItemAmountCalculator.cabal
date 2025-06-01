@@ -1,0 +1,36 @@
+cabal-version: 2.2
+
+name:           ItemAmountCalculator
+version:        1.0.0.0
+description:    Please see the README on GitHub at <https://github.com/t-sasaki915/ItemAmountCalculator#readme>
+homepage:       https://github.com/t-sasaki915/ItemAmountCalculator#readme
+bug-reports:    https://github.com/t-sasaki915/ItemAmountCalculator/issues
+author:         Toma Sasaki
+maintainer:     netst915@gmail.com
+copyright:      2025 Toma Sasaki
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/t-sasaki915/ItemAmountCalculator
+
+executable ItemAmountCalculator-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_ItemAmountCalculator
+  autogen-modules:
+      Paths_ItemAmountCalculator
+  hs-source-dirs:
+      app
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , miso
+    , lens ==5.3.4
+  default-language: Haskell2010
+  default-extensions: LambdaCase, OverloadedStrings
+
