@@ -1,0 +1,79 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install requirements
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+      - name: Setup ghcup
+        run: |
+          export BOOTSTRAP_HASKELL_NONINTERACTIVE=1
+          export BOOTSTRAP_HASKELL_MINIMAL=1
+          curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+      - name: Install build tools
+        run: |
+          source ~/.ghcup/env
+          ghcup install cabal 3.14.2.0
+
+          git clone https://github.com/emscripten-core/emsdk.git
+          cd emsdk
+          ./emsdk install 3.1.74
+          ./emsdk activate 3.1.74
+          source ./emsdk_env.sh
+
+          ghcup config add-release-channel cross
+          emconfigure ghcup install ghc --set javascript-unknown-ghcjs-9.12.2
+      - name: Cache .cabal
+        uses: actions/cache@v4.2.3
+        env:
+          cache-name: cache-cabal
+        with:
+          path: ~/.local/state/cabal/store
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('cabal-js.project') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Build
+        run: |
+          source ~/.ghcup/env
+
+          cabal update
+
+          chmod +x build.sh
+          ./build.sh
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
