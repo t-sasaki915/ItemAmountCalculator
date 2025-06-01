@@ -30,20 +30,21 @@ instance Calculator RawNumberToChests where
 
     viewCalculatorPure RawNumberToChests results =
         let largeChests = results !! 0
-            chests = results !! 1
-            stacks = results !! 2
-            remains = results !! 3 in div_ []
-                [ h2_ [] [text "Raw Number --> Chests"]
-                , input_ [type_ "text", placeholder_ "Number or expression", onInput RawNumberToChestsInputUpdate]
-                , div_ [class_ "spacer"] []
-                , span_ []
-                    [ text "items = "
-                    , text (ms largeChests)
-                    , text " Large Chests + "
-                    , text (ms chests)
-                    , text " Chests + "
-                    , text (ms stacks)
-                    , text " Stacks + "
-                    , text (ms remains)
+            chests      = results !! 1
+            stacks      = results !! 2
+            remains     = results !! 3 in
+                div_ []
+                    [ h2_ [] [text "Raw Number --> Chests"]
+                    , input_ [type_ "text", placeholder_ "Number or expression", onInput RawNumberToChestsInputUpdate]
+                    , div_ [class_ "spacer"] []
+                    , span_ []
+                        [ text "items = "
+                        , text (ms largeChests)
+                        , text " Large Chests + "
+                        , text (ms chests)
+                        , text " Chests + "
+                        , text (ms stacks)
+                        , text " Stacks + "
+                        , text (ms remains)
+                        ]
                     ]
-                ]
