@@ -7,3 +7,5 @@ packages:
 extra-deps:
 - git: https://github.com/dmjio/miso
   commit: 5083584527a76934be0c361c6a1cc9eabc2a41f3
+
+- ParserFunction-0.1.0
