@@ -37,6 +37,12 @@ executable ItemAmountCalculator-exe
   main-is: Main.hs
   other-modules:
       Paths_ItemAmountCalculator
+      Calculator.RawNumberToChests
+      Calculator.RawNumberToShulkerBoxes
+      Action
+      Calculator
+      ExprEvaluation
+      Model
   autogen-modules:
       Paths_ItemAmountCalculator
   hs-source-dirs:
@@ -48,6 +54,7 @@ executable ItemAmountCalculator-exe
     , miso
     , lens ==5.3.4
     , ParserFunction ==0.1.0
+    , mtl ==2.3.1
   default-language: Haskell2010
   default-extensions: LambdaCase, OverloadedStrings
 
