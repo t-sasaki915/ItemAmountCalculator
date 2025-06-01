@@ -6,7 +6,9 @@ cabal build --project-file cabal-js.project --allow-newer
 
 mkdir -p build
 
-cp -v $(cabal list-bin ItemAmountCalculator-exe --project-file cabal-js.project --allow-newer).jsexe/all.js build/index.js
+LISTBIN_RESULT=$(cabal list-bin ItemAmountCalculator-exe --project-file cabal-js.project --allow-newer)
+
+cp -v $(echo $LISTBIN_RESULT | grep -o '/[^"]*').jsexe/all.js build/index.js
 
 cp -v -r static/* build
 
