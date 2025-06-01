@@ -34,8 +34,12 @@ updateModel UpdateStackUnit = do
         then get >>= put . set stackUnit 64
         else
             case readMaybe (fromMisoString input) of
-                Just newStackUnit -> get >>= put . set stackUnit newStackUnit
-                Nothing           -> io_ $ alert "Unrecognisable number"
+                Just newStackUnit ->
+                    if newStackUnit > 0
+                        then get >>= put . set stackUnit newStackUnit
+                        else io_ $ alert "This must be more than 0."
+
+                Nothing -> io_ $ alert "Unrecognisable number."
 
     recalculateAll
 
