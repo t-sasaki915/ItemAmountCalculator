@@ -9,6 +9,7 @@ import           Text.Read                          (readMaybe)
 
 import           Action                             (Action (..))
 import           Calculator                         (Calculator (..))
+import           Calculator.ChestsToRawNumber       (ChestsToRawNumber (..))
 import           Calculator.RawNumberToChests       (RawNumberToChests (..))
 import           Calculator.RawNumberToShulkerBoxes (RawNumberToShulkerBoxes (..))
 import           Calculator.ShulkerBoxesToRawNumber (ShulkerBoxesToRawNumber (..))
@@ -18,9 +19,11 @@ updateModel :: Action -> Effect Model Action
 updateModel (RawNumberToShulkerBoxesInputUpdate newInput) =
     get >>= put . set rawNumberToShulkerBoxesInput newInput >>
         issue CalculateRawNumberToShulkerBoxes
+
 updateModel (RawNumberToChestsInputUpdate newInput) =
     get >>= put . set rawNumberToChestsInput newInput >>
         issue CalculateRawNumberToChests
+
 updateModel (ShulkerBoxesToRawNumberShulkerBoxInputUpdate newInput) =
     get >>= put . set shulkerBoxesToRawNumberShulkerBoxInput newInput >>
         issue CalculateShulkerBoxesToRawNumber
@@ -31,9 +34,23 @@ updateModel (ShulkerBoxesToRawNumberRemainInputUpdate newInput) =
     get >>= put . set shulkerBoxesToRawNumberRemainInput newInput >>
         issue CalculateShulkerBoxesToRawNumber
 
+updateModel (ChestsToRawNumberLargeChestInputUpdate newInput) =
+    get >>= put . set chestsToRawNumberLargeChestInput newInput >>
+        issue CalculateChestsToRawNumber
+updateModel (ChestsToRawNumberChestInputUpdate newInput) =
+    get >>= put . set chestsToRawNumberChestInput newInput >>
+        issue CalculateChestsToRawNumber
+updateModel (ChestsToRawNumberStackInputUpdate newInput) =
+    get >>= put . set chestsToRawNumberStackInput newInput >>
+        issue CalculateChestsToRawNumber
+updateModel (ChestsToRawNumberRemainInputUpdate newInput) =
+    get >>= put . set chestsToRawNumberRemainInput newInput >>
+        issue CalculateChestsToRawNumber
+
 updateModel CalculateRawNumberToShulkerBoxes = calculate RawNumberToShulkerBoxes
 updateModel CalculateRawNumberToChests       = calculate RawNumberToChests
 updateModel CalculateShulkerBoxesToRawNumber = calculate ShulkerBoxesToRawNumber
+updateModel CalculateChestsToRawNumber       = calculate ChestsToRawNumber
 
 updateModel (StackUnitInputUpdate newInput) =
     get >>= put . set stackUnitInput newInput
@@ -59,6 +76,7 @@ recalculateAll = mapM_ issue
     [ CalculateRawNumberToShulkerBoxes
     , CalculateRawNumberToChests
     , CalculateShulkerBoxesToRawNumber
+    , CalculateChestsToRawNumber
     ]
 
 viewModel :: Model -> View Action
@@ -68,6 +86,7 @@ viewModel mdl = div_ []
     , viewCalculator RawNumberToShulkerBoxes mdl
     , viewCalculator RawNumberToChests mdl
     , viewCalculator ShulkerBoxesToRawNumber mdl
+    , viewCalculator ChestsToRawNumber mdl
 
     , h2_ [] [text "Settings"]
 

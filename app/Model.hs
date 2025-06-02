@@ -15,6 +15,11 @@ module Model
     , shulkerBoxesToRawNumberStackInput
     , shulkerBoxesToRawNumberRemainInput
     , shulkerBoxesToRawNumberRawNumber
+    , chestsToRawNumberLargeChestInput
+    , chestsToRawNumberChestInput
+    , chestsToRawNumberStackInput
+    , chestsToRawNumberRemainInput
+    , chestsToRawNumberRawNumber
     , stackUnitInput
     , stackUnit
     , initialModel
@@ -40,6 +45,12 @@ data Model = Model
     , _shulkerBoxesToRawNumberRemainInput     :: MisoString
     , _shulkerBoxesToRawNumberRawNumber       :: Int
 
+    , _chestsToRawNumberLargeChestInput       :: MisoString
+    , _chestsToRawNumberChestInput            :: MisoString
+    , _chestsToRawNumberStackInput            :: MisoString
+    , _chestsToRawNumberRemainInput           :: MisoString
+    , _chestsToRawNumberRawNumber             :: Int
+
     , _stackUnitInput                         :: MisoString
     , _stackUnit                              :: Int
     } deriving (Show, Eq)
@@ -63,6 +74,12 @@ initialModel = Model
     , _shulkerBoxesToRawNumberStackInput      = mempty
     , _shulkerBoxesToRawNumberRemainInput     = mempty
     , _shulkerBoxesToRawNumberRawNumber       = 0
+
+    , _chestsToRawNumberLargeChestInput       = mempty
+    , _chestsToRawNumberChestInput            = mempty
+    , _chestsToRawNumberStackInput            = mempty
+    , _chestsToRawNumberRemainInput           = mempty
+    , _chestsToRawNumberRawNumber             = 0
 
     , _stackUnitInput                         = mempty
     , _stackUnit                              = 64

@@ -37,6 +37,7 @@ executable ItemAmountCalculator-exe
   main-is: Main.hs
   other-modules:
       Paths_ItemAmountCalculator
+      Calculator.ChestsToRawNumber
       Calculator.RawNumberToChests
       Calculator.RawNumberToShulkerBoxes
       Calculator.ShulkerBoxesToRawNumber
