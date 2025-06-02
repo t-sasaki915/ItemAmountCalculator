@@ -39,6 +39,7 @@ executable ItemAmountCalculator-exe
       Paths_ItemAmountCalculator
       Calculator.RawNumberToChests
       Calculator.RawNumberToShulkerBoxes
+      Calculator.ShulkerBoxesToRawNumber
       Action
       Calculator
       ExprEvaluation

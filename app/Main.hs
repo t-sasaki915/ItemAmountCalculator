@@ -11,6 +11,7 @@ import           Action                             (Action (..))
 import           Calculator                         (Calculator (..))
 import           Calculator.RawNumberToChests       (RawNumberToChests (..))
 import           Calculator.RawNumberToShulkerBoxes (RawNumberToShulkerBoxes (..))
+import           Calculator.ShulkerBoxesToRawNumber (ShulkerBoxesToRawNumber (..))
 import           Model
 
 updateModel :: Action -> Effect Model Action
@@ -20,9 +21,19 @@ updateModel (RawNumberToShulkerBoxesInputUpdate newInput) =
 updateModel (RawNumberToChestsInputUpdate newInput) =
     get >>= put . set rawNumberToChestsInput newInput >>
         issue CalculateRawNumberToChests
+updateModel (ShulkerBoxesToRawNumberShulkerBoxInputUpdate newInput) =
+    get >>= put . set shulkerBoxesToRawNumberShulkerBoxInput newInput >>
+        issue CalculateShulkerBoxesToRawNumber
+updateModel (ShulkerBoxesToRawNumberStackInputUpdate newInput) =
+    get >>= put . set shulkerBoxesToRawNumberStackInput newInput >>
+        issue CalculateShulkerBoxesToRawNumber
+updateModel (ShulkerBoxesToRawNumberRemainInputUpdate newInput) =
+    get >>= put . set shulkerBoxesToRawNumberRemainInput newInput >>
+        issue CalculateShulkerBoxesToRawNumber
 
 updateModel CalculateRawNumberToShulkerBoxes = calculate RawNumberToShulkerBoxes
 updateModel CalculateRawNumberToChests       = calculate RawNumberToChests
+updateModel CalculateShulkerBoxesToRawNumber = calculate ShulkerBoxesToRawNumber
 
 updateModel (StackUnitInputUpdate newInput) =
     get >>= put . set stackUnitInput newInput
@@ -47,6 +58,7 @@ recalculateAll :: Effect Model Action
 recalculateAll = mapM_ issue
     [ CalculateRawNumberToShulkerBoxes
     , CalculateRawNumberToChests
+    , CalculateShulkerBoxesToRawNumber
     ]
 
 viewModel :: Model -> View Action
@@ -55,6 +67,7 @@ viewModel mdl = div_ []
 
     , viewCalculator RawNumberToShulkerBoxes mdl
     , viewCalculator RawNumberToChests mdl
+    , viewCalculator ShulkerBoxesToRawNumber mdl
 
     , h2_ [] [text "Settings"]
 

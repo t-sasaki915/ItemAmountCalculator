@@ -8,6 +8,11 @@ data Action = RawNumberToShulkerBoxesInputUpdate MisoString
             | RawNumberToChestsInputUpdate MisoString
             | CalculateRawNumberToChests
 
+            | ShulkerBoxesToRawNumberShulkerBoxInputUpdate MisoString
+            | ShulkerBoxesToRawNumberStackInputUpdate MisoString
+            | ShulkerBoxesToRawNumberRemainInputUpdate MisoString
+            | CalculateShulkerBoxesToRawNumber
+
             | StackUnitInputUpdate MisoString
             | UpdateStackUnit
             deriving (Show, Eq)
