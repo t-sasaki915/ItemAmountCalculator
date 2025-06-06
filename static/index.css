@@ -14,13 +14,6 @@ body {
     padding: 0 !important;
 }
 
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
 .spacer {
     display: inline-block;
     width: 0.5em;
