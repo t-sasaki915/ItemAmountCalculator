@@ -98,7 +98,7 @@ viewModel mdl = div_ []
 
     , div_ []
         [ br_ []
-        , span_ [] [text "Author: ", a_ [href_ "https://t-sasski.net"] [text "Toma Sasaki"]]
+        , span_ [] [text "Author: ", a_ [href_ "https://t-sasaki.net"] [text "Toma Sasaki"]]
         , br_ []
         , span_ [] [text "Source: ", a_ [href_ "https://github.com/t-sasaki915/ItemAmountCalculator"] [text "t-sasaki915/ItemAmountCalculator"]]
         , br_ []
