@@ -44,7 +44,7 @@ class Calculator a where
                     get >>= put . set resultLens 0
         where
             calculationContext :: (Monoid w, Monad m) => RWST r w Model m CalculationContext
-            calculationContext = get >>= \state -> return $
+            calculationContext = get >>= \state -> pure $
                 CalculationContext
                     { stackUnit = state ^. Model.stackUnit
                     }
@@ -53,7 +53,7 @@ class Calculator a where
             evaluateInputs = get >>= \state ->
                 forM (inputLenses a) $ \inputLens ->
                     case evaluateExpr (state ^. inputLens) of
-                        Just value -> return value
+                        Just value -> pure value
                         Nothing    -> throwError ()
 
     {- HLINT ignore "Avoid lambda" -}
