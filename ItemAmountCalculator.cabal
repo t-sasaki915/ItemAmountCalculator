@@ -36,8 +36,7 @@ executable ItemAmountCalculator-exe
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      ItemAmountCalculator
-    , base >=4.7 && <5
+      base >=4.7 && <5
     , miso
     , lens ==5.3.4
     , ParserFunction ==0.1.0
