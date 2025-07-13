@@ -58,10 +58,9 @@ jobs:
         run: |
           source ~/.ghcup/env
 
-          cabal update
+          cabal v2-update
 
-          chmod +x build.sh
-          ./build.sh
+          make
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
