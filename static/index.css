@@ -9,11 +9,6 @@
         "wdth" 100;
 }
 
-body {
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 .spacer {
     display: inline-block;
     width: 0.5em;
