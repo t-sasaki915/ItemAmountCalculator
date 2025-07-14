@@ -21,28 +21,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install requirements
+      - name: Install build-essential
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential
-      - name: Setup ghcup
-        run: |
-          export BOOTSTRAP_HASKELL_NONINTERACTIVE=1
-          export BOOTSTRAP_HASKELL_MINIMAL=1
-          curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-      - name: Install build tools
-        run: |
-          source ~/.ghcup/env
-          ghcup install cabal 3.14.2.0
-
-          git clone https://github.com/emscripten-core/emsdk.git
-          cd emsdk
-          ./emsdk install 3.1.74
-          ./emsdk activate 3.1.74
-          source ./emsdk_env.sh
-
-          ghcup config add-release-channel cross
-          emconfigure ghcup install ghc --set javascript-unknown-ghcjs-9.12.2
+      - name: Install npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install tools
+        run: make init-tools
       - name: Cache .cabal
         uses: actions/cache@v4.2.3
         env:
@@ -55,12 +43,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Build
-        run: |
-          source ~/.ghcup/env
-
-          cabal v2-update
-
-          make
+        run: cabal v2-update && make PRODUCTION=1
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
