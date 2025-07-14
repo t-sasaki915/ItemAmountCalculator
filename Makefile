@@ -6,8 +6,10 @@ EMSDK_VERSION := 3.1.74
 
 .PHONY: build http copy-statics clean init-tools
 
-build: copy-statics
+build:
 	mkdir -p $(BUILD_DIR)
+
+	cp -v -r static/* $(BUILD_DIR)
 
 	cabal v2-build --project-file cabal-js.project --allow-newer
 
@@ -29,15 +31,6 @@ ifeq (, $(shell which http-server))
 endif
 
 	http-server $(BUILD_DIR)
-
-copy-statics:
-	mkdir -p $(BUILD_DIR)
-
-	cp -v -r static/* $(BUILD_DIR)
-
-	@echo ""
-	@echo "COPY-STATICS SUCCESSFUL."
-	@echo ""
 
 clean:
 	cabal v2-clean
