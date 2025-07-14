@@ -4,7 +4,7 @@ CABAL_VERSION := 3.14.2.0
 GHC_VERSION   := 9.12.2
 EMSDK_VERSION := 3.1.74
 
-.PHONY: build http copy-statics clean init-tools
+.PHONY: build debug clean init-tools
 
 build:
 	mkdir -p $(BUILD_DIR)
