@@ -16,7 +16,7 @@ source ~/.bashrc
 ```
 ## Build
 ```bash
-cabal v2-update
+make update
 make # or 'make build'
 ```
 ## Debug
