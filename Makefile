@@ -13,7 +13,7 @@ build:
 
 	cabal v2-build --project-file cabal-js.project --allow-newer
 
-	@INPUT_JS=$(shell echo $$(cabal list-bin ItemAmountCalculator-exe --project-file cabal-js.project --allow-newer) | grep -o '/[^"]*').jsexe/all.js && \
+	@INPUT_JS=$(shell cabal list-bin ItemAmountCalculator-exe --project-file cabal-js.project --allow-newer --verbose=0).jsexe/all.js && \
 	OUTPUT_JS="$(BUILD_DIR)/index.js" && \
 	if [ "$(PRODUCTION)" = "1" ]; then \
 		node-minify --compressor uglify-js --input "$$INPUT_JS" --output "$$OUTPUT_JS"; \
