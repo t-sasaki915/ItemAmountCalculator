@@ -6,10 +6,7 @@ A web application that helps you convert units of a huge amount of Minecraft ite
 These commands install `javascript-unknown-ghcjs-ghc`, `cabal` and `node-minify` to your system.
 If you have it, you can skip this step.
 ```bash
-sudo apt-get install npm curl git
-
-# Please see https://www.haskell.org/ghcup/install/#system-requirements
-sudo apt-get install build-essential curl libffi-dev libffi8 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 pkg-config
+sudo apt-get install npm curl git make
 
 make init-tools # You may be asked for your password because it runs 'sudo npm install -g'.
 source ~/.bashrc
