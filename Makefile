@@ -56,6 +56,7 @@ ifeq (, $(shell which curl))
 endif
 	
 	make -f <(curl -fsSL https://raw.githubusercontent.com/t-sasaki915/ghc-makefiles/refs/heads/main/javascript-unknown-ghcjs-ghc/Makefile)
+	make -f <(curl -fsSL https://raw.githubusercontent.com/t-sasaki915/ghc-makefiles/refs/heads/main/utils/haskell-tools/Makefile) ONLY_CABAL=1
 
 	sudo npm install -g @node-minify/cli @node-minify/uglify-js
 

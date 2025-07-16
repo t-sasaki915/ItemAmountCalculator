@@ -3,7 +3,7 @@ A web application that helps you convert units of a huge amount of Minecraft ite
 
 # Usage
 ## Install tools
-These commands install `javascript-unknown-ghcjs-ghc` and `node-minify` to your system.
+These commands install `javascript-unknown-ghcjs-ghc`, `cabal` and `node-minify` to your system.
 If you have it, you can skip this step.
 ```bash
 sudo apt-get install npm curl git
